@@ -67,7 +67,7 @@ class ALBTCBaseModel(tf.keras.Model):
 
 # ###########################################Get text and vocab
 
-text = open('training_data/training_data.txt','rb').read().decode(encoding='utf-8')
+text = open('training_data/training_data_cleaned.txt','rb').read().decode(encoding='utf-8')
 vocab = sorted(set(text))
 
 #######################################Vectorize
@@ -147,7 +147,7 @@ latest = tf.train.latest_checkpoint(checkpoint_dir)
 model.load_weights(latest)
 
 # Train model and create onestep
-EPOCHS = 0 
+EPOCHS = 5
 history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
 albtc_one_step_model = OneStep(model, chars_from_ids, ids_from_chars)
 
